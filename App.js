@@ -1,31 +1,24 @@
-import { Button, StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import { StyleSheet } from 'react-native';
 import { FichadaEnCurso } from './views/EnCursoView';
 import { FichadaNueva } from './views/NuevaView'
-import { FinalizarFichada } from './views/FinalizarView'
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+//import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { createStaticNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const RootStack = createNativeStackNavigator({
+  initialRouteName: "Nueva",
+  screens: {
+    Nueva: FichadaNueva,
+    EnCurso: FichadaEnCurso
+  }
+});
+
+const Navigation = createStaticNavigation(RootStack);
 
 export default function App() {
 
-  const [vistaActual, setVistaActual] = useState("FichadaNueva");
-
-  const vistas = {
-    FichadaNueva: <FichadaNueva />,
-    FichadaEnCurso: <FichadaEnCurso />,
-    FinalizarFichada: <FinalizarFichada />
-  }
-
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-          {vistas[vistaActual]}
-          <View style={styles.buttonContainer}>
-            <Button title="Nueva" onPress={() => setVistaActual('FichadaNueva')} />
-            <Button title="En Curso" onPress={() => setVistaActual('FichadaEnCurso')} />
-            <Button title="Finalizar" onPress={() => setVistaActual('FinalizarFichada')} />
-          </View> 
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <Navigation />
   );
 }
 

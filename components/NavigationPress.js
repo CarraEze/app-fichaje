@@ -1,11 +1,11 @@
-import { StyleSheet, Pressable ,Text, View} from 'react-native';
+import { StyleSheet, Pressable, Text, View } from 'react-native';
 
-export const RedPress = ({ children }) => {
+export const NavigationPress = ({ text, onPress }) => {
   return (
-    <Pressable style={styles.titleContainer}>
-        <Text style={styles.titleText}>
-        { children }
-        </Text>
+    <Pressable style={styles.titleContainer} onPress={onPress}>
+      <Text style={styles.titleText}>
+        {text}
+      </Text>
     </Pressable>
   );
 };
